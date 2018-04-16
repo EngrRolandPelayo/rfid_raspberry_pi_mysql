@@ -1,25 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 #
-#    Copyright 2014,2018 Mario Gomez <mario.gomez@teubi.co>
+#    Copyright 2018 Roland Pelayo
 #
-#    This file is part of MFRC522-Python
+#    This file is based on Read.py from MFRC522-Python library by Mario Gomez
+
 #    MFRC522-Python is a simple Python implementation for
 #    the MFRC522 NFC Card Reader for the Raspberry Pi.
-#
-#    MFRC522-Python is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Lesser General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    MFRC522-Python is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Lesser General Public License for more details.
-#
-#    You should have received a copy of the GNU Lesser General Public License
-#    along with MFRC522-Python.  If not, see <http://www.gnu.org/licenses/>.
-#
 
 import RPi.GPIO as GPIO
 import MFRC522
@@ -71,28 +58,30 @@ while continue_reading:
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
 
-        # Print UID
-        #print "Card read UID: %s,%s,%s,%s" % (uid[0], uid[1], uid[2], uid[3])
-	#print "UID: %s,%s,%s,%s" % (uid[0],uid[1],uid[2],uid[3])
+    # Print UID 
 	_uid = str(uid[0]) + "," + str(uid[1]) + "," + str(uid[2]) + "," + str(uid[3])
 	print _uid
 
 	# Create DB cursor
 	cur = db.cursor();
     
-        # Check if UID is in DB
+    # Check if UID is in DB
 	cur.execute("SELECT * FROM users WHERE uid = %s" , (_uid,))
 
+	# Read data
 	for row in cur.fetchall():
 		firstname = str(row[1])
 		lastname = str(row[2])
-
+	
+	# Read time and date
 	_currTime = strftime("%H:%M:%S",gmtime())
 	_currDate = date.today().strftime("%Y-%m-%d")
 
+	# Send out a greeting to print name and date
 	print "Hello " + firstname + " " + lastname
         print _currDate + " " + _currTime
 
+	# Insert every login into database
 	try:
 		try:	
 			cur.execute("INSERT INTO log (uid,fname,lname,_date,_time) VALUES (%s,%s,%s,%s,%s)", (_uid,firstname,lastname,_currDate,_currTime))
