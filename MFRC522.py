@@ -400,7 +400,8 @@ class MFRC522:
         if status == self.MI_OK:
             self.MFRC522_Read(i)
         else:
-            print "Authentication error"
+            #print "Authentication error"
+			pass
         i = i+1
 
   def MFRC522_Init(self):
