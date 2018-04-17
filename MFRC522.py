@@ -341,7 +341,7 @@ class MFRC522:
       #print "AUTH ERROR!!"
 	  pass
     if not (self.Read_MFRC522(self.Status2Reg) & 0x08) != 0:
-      print "AUTH ERROR(status2reg & 0x08) != 0"
+      #print "AUTH ERROR(status2reg & 0x08) != 0"
 	  pass
 
     # Return the status
