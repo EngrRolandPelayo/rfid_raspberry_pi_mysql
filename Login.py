@@ -107,7 +107,7 @@ while continue_reading:
             MIFAREReader.MFRC522_Read(8)
             MIFAREReader.MFRC522_StopCrypto1()
         else:
-            print "Authentication error"
+            pass
 
 	
 db.close()

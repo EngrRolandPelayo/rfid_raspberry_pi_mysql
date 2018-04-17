@@ -3,6 +3,8 @@
 #
 #    Copyright 2014,2018 Mario Gomez <mario.gomez@teubi.co>
 #
+#	 Edited by Roland Pelayo for Maker.Pro (April 2018)
+#
 #    This file is part of MFRC522-Python
 #    MFRC522-Python is a simple Python implementation for
 #    the MFRC522 NFC Card Reader for the Raspberry Pi.
@@ -338,11 +340,9 @@ class MFRC522:
 
     # Check if an error occurred
     if not(status == self.MI_OK):
-      #print "AUTH ERROR!!"
-	  pass
+      pass
     if not (self.Read_MFRC522(self.Status2Reg) & 0x08) != 0:
-      #print "AUTH ERROR(status2reg & 0x08) != 0"
-	  pass
+      pass
 
     # Return the status
     return status
@@ -362,7 +362,6 @@ class MFRC522:
       print "Error while reading!"
     i = 0
     if len(backData) == 16:
-      #print "Sector "+str(blockAddr)+" "+str(backData)
       pass
   
   def MFRC522_Write(self, blockAddr, writeData):
@@ -400,8 +399,7 @@ class MFRC522:
         if status == self.MI_OK:
             self.MFRC522_Read(i)
         else:
-            #print "Authentication error"
-			pass
+            pass
         i = i+1
 
   def MFRC522_Init(self):
